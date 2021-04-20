@@ -61,6 +61,7 @@ client.connect((err) => {
 
   app.post('/addOrder', (req, res) => {
     const newOrder = req.body;
+    console.log(newOrder);
     ordersCollection.insertOne(newOrder)
     .then(result => {
         console.log(result)
@@ -83,6 +84,18 @@ app.get ('/allOrderList', (req,res)=>{
   .toArray((err, orderList)=> {
     res.send(orderList)
   })
+})
+
+//update Status
+app.patch('/updateOrderStatus', (req, res) => {
+  
+  ordersCollection.updateOne({ _id: ObjectId(req.body.id) }, {
+      $set: { status: req.body.status }
+  })
+      .then(result => {
+        console.log(result.modifiedCount);
+          res.send(result.modifiedCount > 0)
+      })
 })
 
 
