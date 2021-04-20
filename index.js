@@ -12,7 +12,7 @@ app.use(cors());
 app.use(bodyParser.json());
 const MongoClient = require("mongodb").MongoClient;
 const uri =
-  "mongodb+srv://organicUser:viGM2m!4Vju4F9C@cluster0.tvsz3.mongodb.net/event-planning?retryWrites=true&w=majority";
+  `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.tvsz3.mongodb.net/${process.env.DB_DATABASE}?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
